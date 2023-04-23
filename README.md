@@ -1,119 +1,53 @@
-# Semantic Kernel C# Notebooks
+Semantic Kernel C# 笔记本
+当前文件夹包含几个 C# Jupyter 笔记本，展示了如何使用 Semantic Kernel 开始工作。笔记本按照复杂度递增的顺序进行组织。
 
-The current folder contains a few C# Jupyter Notebooks that demonstrate how to get started with
-the Semantic Kernel. The notebooks are organized in order of increasing complexity.
+要运行这些笔记本，我们建议按照以下步骤操作：
 
-To run the notebooks, we recommend the following steps:
+安装 .NET 7
+安装 Visual Studio Code (VS Code)
+启动 VS Code 并安装“Polyglot”扩展。要求的最小版本为：v1.0.4102020（2022年2月）。
+以上步骤应该足够了，现在您可以在 VS Code 中打开所有的 C# 笔记本。
 
-- [Install .NET 7](https://dotnet.microsoft.com/download/dotnet/7.0)
-- [Install Visual Studio Code (VS Code)](https://code.visualstudio.com)
-- Launch VS Code and [install the "Polyglot" extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode).
-  Min version required: v1.0.4102020 (Feb 2022).
+VS Code 截图示例：
 
-The steps above should be sufficient, you can now **open all the C# notebooks in VS Code**.
+image
 
-VS Code screenshot example:
+设置 OpenAI API 密钥
+要开始使用这些笔记本，请确保将适当的 API 密钥添加到 config/settings.json 中。
 
-![image](https://user-images.githubusercontent.com/371009/216761942-1861635c-b4b7-4059-8ecf-590d93fe6300.png)
+您可以手动创建文件，也可以运行设置笔记本。
 
-## Set your OpenAI API key
+对于 Azure OpenAI：
 
-To start using these notebooks, be sure to add the appropriate API keys to `config/settings.json`.
-
-You can create the file manually or run [the Setup notebook](0-AI-settings.ipynb).
-
-For Azure OpenAI:
-
-```json
+json
+Copy code
 {
   "type": "azure",
-  "model": "...", // Azure OpenAI Deployment Name
-  "endpoint": "...", // Azure OpenAI endpoint
-  "apikey": "..." // Azure OpenAI key
+  "model": "...", // Azure OpenAI 部署名称
+  "endpoint": "...", // Azure OpenAI 终结点
+  "apikey": "..." // Azure OpenAI 密钥
 }
-```
+对于 OpenAI：
 
-For OpenAI:
-
-```json
+json
+Copy code
 {
   "type": "openai",
-  "model": "text-davinci-003", // OpenAI model name
-  "apikey": "...", // OpenAI API Key
-  "org": "" // only for OpenAI accounts with multiple orgs
+  "model": "text-davinci-003", // OpenAI 模型名称
+  "apikey": "...", // OpenAI API 密钥
+  "org": "" // 仅适用于拥有多个组织的 OpenAI 账户
 }
-```
+如果您需要 Azure OpenAI 密钥，请单击此处。
+如果您需要 OpenAI 密钥，请单击此处。
 
-If you need an Azure OpenAI key, go [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/quickstart?pivots=rest-api).
-If you need an OpenAI key, go [here](https://platform.openai.com/account/api-keys)
+主题
+在开始之前，请确保配置了 config/settings.json，请参见前一节。
 
-# Topics
+要快速开始，请查看入门笔记本。
 
-Before starting, make sure you configured `config/settings.json`,
-see the previous section.
-
-For a quick dive, look at the [getting started notebook](00-getting-started.ipynb).
-
-1. [Loading and configuring Semantic Kernel](01-basic-loading-the-kernel.ipynb)
-2. [Running AI prompts from file](02-running-prompts-from-file.ipynb)
-3. [Creating Semantic Functions at runtime (i.e. inline functions)](03-semantic-function-inline.ipynb)
-4. [Using Context Variables to Build a Chat Experience](04-context-variables-chat.ipynb)
-5. [Creating and Executing Plans](05-using-the-planner.ipynb)
-6. [Building Memory with Embeddings](06-memory-and-embeddings.ipynb)
-7. [Creating images with DALL-E 2](07-DALL-E-2.ipynb)
-8. [Chatting with ChatGPT and Images](08-chatGPT-with-DALL-E-2.ipynb)
-
-# Run notebooks in the browser with JupyterLab
-
-You can run the notebooks also in the browser with JupyterLab. These steps
-should be sufficient to start:
-
-Install Python 3, Pip and .NET 7 in your system, then:
-
-    pip install jupyterlab
-    dotnet tool install -g Microsoft.dotnet-interactive
-    dotnet tool update -g Microsoft.dotnet-interactive
-    dotnet interactive jupyter install
-
-This command will confirm that Jupyter now supports C# notebooks:
-
-    jupyter kernelspec list
-
-Enter the notebooks folder, and run this to launch the browser interface:
-
-    jupyter-lab
-
-![image](https://user-images.githubusercontent.com/371009/216756924-41657aa0-5574-4bc9-9bdb-ead3db7bf93a.png)
-
-# Troubleshooting
-
-## Nuget
-
-If you are unable to get the Nuget package, first list your Nuget sources:
-
-```sh
-dotnet nuget list source
-```
-
-If you see `No sources found.`, add the NuGet official package source:
-
-```sh
-dotnet nuget add source "https://api.nuget.org/v3/index.json" --name "nuget.org"
-```
-
-Run `dotnet nuget list source` again to verify the source was added.
-
-## Polyglot Notebooks
-
-If somehow the notebooks don't work, run these commands:
-
-- Install .NET Interactive: `dotnet tool install -g Microsoft.dotnet-interactive`
-- Register .NET kernels into Jupyter: `dotnet interactive jupyter install` (this might return some errors, ignore them)
-- If you are still stuck, read the following pages:
-  - https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode
-  - https://devblogs.microsoft.com/dotnet/net-core-with-juypter-notebooks-is-here-preview-1/
-  - https://docs.servicestack.net/jupyter-notebooks-csharp
-  - https://developers.refinitiv.com/en/article-catalog/article/using--net-core-in-jupyter-notebook
-
-Note: ["Polyglot Notebooks" used to be called ".NET Interactive Notebooks"](https://devblogs.microsoft.com/dotnet/dotnet-interactive-notebooks-is-now-polyglot-notebooks/),
-so you might find online some documentation referencing the old name.
+加载和配置 Semantic Kernel
+从文件运行 AI 提示
+在运行时创建语义函数（即内联函数）
+使用上下文变量构建聊天体验
+创建和执行计划
+使用嵌入构建内存
